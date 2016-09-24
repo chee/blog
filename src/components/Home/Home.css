@@ -1,0 +1,11 @@
+.home {
+	max-width: 1000px;
+	background: white;
+	margin: auto;
+	padding: 20px;
+}
+
+.home-post-title a {
+	text-decoration: none;
+	color: #222;
+}

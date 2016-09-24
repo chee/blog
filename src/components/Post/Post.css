@@ -1,0 +1,20 @@
+.post {
+	padding: 20px;
+	margin: auto;
+	max-width: 1000px;
+	background: white;
+}
+
+.post code {
+	white-space: pre-line;
+}
+
+.post-footer {
+	max-width: 1000px;
+	margin: auto;
+	padding: 20px;
+}
+
+.post-footer a {
+	color: black;
+}
