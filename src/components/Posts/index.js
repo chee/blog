@@ -8,7 +8,7 @@ function links(postdata) {
     <div key={index} className="post-link-block">
       <Link className="post-link" to={`/post/${post.slug}`}>
         <span className="post-link-title">{post.title}</span>
-        <time className="post-link-date" dateTime="2001-05-15 19:00">{(new Date(post.date)).toDateString().toLowerCase()}</time>
+        <time className="post-link-date" dateTime={(new Date(post.date)).toISOString().replace(/...\..*/, '').replace('T', ' ')}>{(new Date(post.date)).toDateString().toLowerCase()}</time>
       </Link>
     </div>
   ))
