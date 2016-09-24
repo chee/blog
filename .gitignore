@@ -23,7 +23,7 @@ lib-cov
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
-# Dependency directories
+# dependencies
 node_modules
 jspm_packages
 
