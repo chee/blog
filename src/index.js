@@ -8,6 +8,8 @@ import thunk from 'redux-thunk'
 
 import * as reducers from './reducers'
 
+import './normalize.css'
+
 import Application from './containers/Application'
 import Home from './components/Home'
 import Post from './components/Post'
