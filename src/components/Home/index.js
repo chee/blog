@@ -3,8 +3,8 @@ import { Link } from 'react-router'
 
 import './Home.css'
 
-function makePosts(posts) {
-  return Object.keys(posts).slice(0, 10).map((slug, index) => {
+function makePosts(postdata, posts) {
+  return postdata.slice(0, 10).map(({ slug }, index) => {
     const post = {...posts[slug]}
     post.__html = post.__html.replace(/.*\n/, '')
     return (
@@ -26,11 +26,12 @@ class Home extends React.Component {
   }
 
   render() {
-    const { posts } = this.props
-    if (Object.keys(posts).length) {
+    const { posts, postdata } = this.props
+
+    if (postdata.length <= Object.keys(posts).length) {
       return (
         <div className="home home-posts">
-          { makePosts(posts) }
+          { makePosts(postdata, posts) }
           <div className="home-footer post-footer">
             <Link to="/posts">other posts</Link>
           </div>
