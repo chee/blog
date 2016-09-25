@@ -1,20 +1,13 @@
-@import 'https://fonts.googleapis.com/css?family=BioRhyme';
-
 .header {
   background-color: #ff2a50;
   padding: 1px;
   color: white;
-  font-family: BioRhyme;
 }
 
-.header a {
+.header-link {
   color: white;
   text-decoration: none;
   max-width: 1000px;
   display: inline-block;
   margin: auto;
-}
-
-.header-url {
-  opacity: 0.2;
 }

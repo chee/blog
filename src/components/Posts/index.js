@@ -5,10 +5,10 @@ import './Posts.css'
 
 function links(postdata) {
   return postdata.map((post, index) => (
-    <div key={index} className="post-link-block">
-      <Link className="post-link" to={`/post/${post.slug}`}>
-        <span className="post-link-title">{post.title}</span>
-        <time className="post-link-date" dateTime={(new Date(post.date)).toISOString().replace(/...\..*/, '').replace('T', ' ')}>{(new Date(post.date)).toDateString().toLowerCase()}</time>
+    <div key={index} className="posts-link-block">
+      <Link className="posts-link" to={`/post/${post.slug}`}>
+        <span className="posts-link-title">{post.title}</span>
+        <time className="posts-link-date" dateTime={(new Date(post.date)).toISOString().replace(/...\..*/, '').replace('T', ' ')}>{(new Date(post.date)).toDateString().toLowerCase()}</time>
       </Link>
     </div>
   ))

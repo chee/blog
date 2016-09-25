@@ -8,14 +8,13 @@ function makePosts(posts) {
     const post = {...posts[slug]}
     post.__html = post.__html.replace(/.*\n/, '')
     return (
-      <div className="home-post post" key={index}>
-        <time className="home-post-date" dateTime={(new Date(post.meta.date)).toISOString().replace(/...\..*/, '').replace('T', ' ')}>{(new Date(post.meta.date)).toDateString().toLowerCase()}</time>
-        <h1 className="home-post-title">
-          <Link to={`/post/${slug}`}>{post.meta.title}</Link>
+      <article className="home-post post" key={index}>
+        <time className="home-post-date post-date" dateTime={(new Date(post.meta.date)).toISOString().replace(/...\..*/, '').replace('T', ' ')}>{(new Date(post.meta.date)).toDateString().toLowerCase()}</time>
+        <h1 className="home-post-title post-title">
+          <Link className="home-post-title-link post-title-link" to={`/post/${slug}`}>{post.meta.title}</Link>
         </h1>
         <div dangerouslySetInnerHTML={post}/>
-          — chee
-      </div>
+      </article>
     )
   })
 }

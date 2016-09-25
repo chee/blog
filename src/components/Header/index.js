@@ -4,7 +4,9 @@ import './Header.css'
 
 const Header = (props) => (
   <div className="header">
-    <Link to="/"><h2><span className="header-url">snaek.org/blog</span> <em>everything at once</em></h2></Link>
+    <Link to="/" className="header-link">
+      <h2>blog</h2>
+    </Link>
   </div>
 )
 

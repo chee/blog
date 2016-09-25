@@ -9,16 +9,6 @@
   margin-bottom: 2em;
 }
 
-.home-post-date {
-  font-size: .9em;
-  color: #888;
-}
-
 .home-post-title {
   margin-top: 5px;
-}
-
-.home-post-title a {
-  text-decoration: none;
-  color: #222;
 }
