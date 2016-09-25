@@ -1,0 +1,13 @@
+.header {
+	background-color: #ff2a50;
+	padding: 1px;
+	color: white;
+}
+
+.header-link {
+	color: white;
+	text-decoration: none;
+	max-width: 1000px;
+	display: inline-block;
+	margin: auto;
+}
