@@ -5,16 +5,18 @@
 	background: white;
 }
 
-.post code {
-	white-space: pre-line;
-}
-
 .post-footer {
 	max-width: 1000px;
 	margin: auto;
 	padding: 20px;
 }
 
-.post-footer a {
-	color: black;
+.post-date {
+	font-size: .9em;
+	color: #888;
+}
+
+.post-title-link {
+	text-decoration: none;
+	color: #222;
 }

@@ -15,10 +15,10 @@ class Post extends React.Component {
 		if (posts[slug]) {
 			return (
 				<div>
-					<div className="post">
+					<article className="post">
 						<div dangerouslySetInnerHTML={posts[slug]}/>
 							— chee
-					</div>
+					</article>
 					<div className="post-footer">
 						<Link to="/posts">other posts</Link>
 					</div>
@@ -29,7 +29,7 @@ class Post extends React.Component {
 			<div>
 				loading post...
 				<div className="post-footer">
-					<Link to="/posts">other posts</Link>
+					<Link className="post-footer-link" to="/posts">other posts</Link>
 				</div>
 			</div>
 		)
