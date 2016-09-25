@@ -1,6 +1,7 @@
 {
-	"name": "blog",
-	"version": "0.1.0",
+	"name": "blogs",
+	"version": "0.0.0",
+	"description": "stupid blog thing written with react and redux that keeps the posts as markdown files and renders them on the client",
 	"private": true,
 	"devDependencies": {
 		"react-scripts": "0.5.1"
@@ -14,6 +15,15 @@
 		"react-router-redux": "^4.0.6",
 		"redux": "^3.6.0",
 		"redux-thunk": "^2.1.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/chee/blogs.git"
+	},
+	"author": "chee <chee@snaek.org> (https://snaek.org/)",
+	"license": "GPL-3.0+",
+	"bugs": {
+		"url": "https://github.com/chee/blogs/issues"
 	},
 	"scripts": {
 		"start": "react-scripts start",
