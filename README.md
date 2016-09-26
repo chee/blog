@@ -27,4 +27,4 @@ that looks like this:
 project was initialised with create-react-app so it's the same `npm run build`
 and `npm run start` as that.
 
-code is bad in places but whatever
+code is bad in places but whatever 🙃
