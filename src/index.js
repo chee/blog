@@ -10,7 +10,7 @@ import * as reducers from './reducers'
 
 import Application from './containers/Application'
 import Home from './components/Home'
-import Post from './components/Post'
+import PostAlone from './components/PostAlone'
 import Posts from './components/Posts'
 
 const createStoreWithMiddleware = applyMiddleware(
@@ -32,7 +32,7 @@ render(
 			<Route path="/" component={Application}>
 				<IndexRoute component={Home}/>
 				<Route path="posts" component={Posts}/>
-				<Route path="post/:slug" component={Post}/>
+				<Route path="post/:slug" component={PostAlone}/>
 			</Route>
 		</Router>
 	</Provider>,

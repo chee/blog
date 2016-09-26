@@ -1,37 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-class Post extends React.Component {
-	componentWillMount() {
-		const { posts, getPost, params: { slug } } = this.props
-		if (posts[slug]) return
-		getPost(slug)
-	}
+import Time from './Time'
 
-	render() {
-		const { posts, params: { slug } } = this.props
-		if (posts[slug]) {
-			return (
-				<div>
-					<article className="post">
-						<div dangerouslySetInnerHTML={posts[slug]}/>
-							— chee
-					</article>
-					<div className="post-footer">
-						<Link to="/posts">other posts</Link>
-					</div>
-				</div>
-			)
+const Post = ({ post }) => (
+	<article className="post">
+		<Time date={post.meta.date}/>
+		{ post.titleLink && (post.__html = post.__html.replace(/.*\n/, '')) &&
+			<h1 className="post-title">
+				<Link className="post-title-link" to={`/post/${post.meta.slug}`}>{post.meta.title}</Link>
+			</h1>
 		}
-		return (
-			<div>
-				loading post...
-				<div className="post-footer">
-					<Link className="post-footer-link" to="/posts">other posts</Link>
-				</div>
-			</div>
-		)
-	}
-}
+		<div dangerouslySetInnerHTML={post}/>
+	</article>
+)
 
 export default Post
