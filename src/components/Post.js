@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import './Post.css'
-
 class Post extends React.Component {
   componentWillMount() {
     const { posts, getPost, params: { slug } } = this.props

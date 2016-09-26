@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import './Home.css'
-
 function makePosts(postdata, posts) {
   return postdata.slice(0, 10).map(({ slug }, index) => {
     const post = {...posts[slug]}
