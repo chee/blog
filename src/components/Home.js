@@ -28,20 +28,16 @@ class Home extends React.Component {
 
     if (postdata.length <= Object.keys(posts).length) {
       return (
-        <div className="home home-posts">
+        <div className="home">
           { makePosts(postdata, posts) }
-          <div className="home-footer post-footer">
-            <Link to="/posts">other posts</Link>
-          </div>
+          <Footer/>
         </div>
       )
     }
     return (
       <div>
         loading posts...
-        <div className="post-footer">
-          <Link to="/posts">other posts</Link>
-        </div>
+        <Footer/>
       </div>
     )
   }
