@@ -3,7 +3,7 @@ import {
   GET_POST_DATA_SUCCESS,
   GET_POST_REQUEST,
   GET_POST_SUCCESS
-} from '../actions'
+} from './actions'
 
 export function postdata(state = [], action) {
   switch(action.type) {
