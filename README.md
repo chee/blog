@@ -20,7 +20,6 @@ that looks like this:
   title: "Hello! i am a blog post",
   date: (new Date).toISOString(),
   slug: "hello-i-am-a-blog-post",
-  file: "/blogs/my-first-blog-post.md"
 }
 ```
 
