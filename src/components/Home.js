@@ -1,19 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router'
 
+import Post from './Post'
+import Footer from './Footer'
+
 function makePosts(postdata, posts) {
   return postdata.slice(0, 10).map(({ slug }, index) => {
     const post = {...posts[slug]}
-    post.__html = post.__html.replace(/.*\n/, '')
-    return (
-      <article className="home-post post" key={index}>
-        <time className="home-post-date post-date" dateTime={(new Date(post.meta.date)).toISOString().replace(/...\..*/, '').replace('T', ' ')}>{(new Date(post.meta.date)).toDateString().toLowerCase()}</time>
-        <h1 className="home-post-title post-title">
-          <Link className="home-post-title-link post-title-link" to={`/post/${slug}`}>{post.meta.title}</Link>
-        </h1>
-        <div dangerouslySetInnerHTML={post}/>
-      </article>
+    post.title = (
+      <h1 className="post-title">
+        <Link className="post-title-link" to={`/post/${slug}`}>{post.meta.title}</Link>
+      </h1>
     )
+    post.__html = post.__html.replace(/.*\n/, '')
+    return <Post post={post} key={index}/>
   })
 }
 
