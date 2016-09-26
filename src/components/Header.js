@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router'
 
 const Header = (props) => (
-	<div className="header">
+	<header className="header">
 		<Link to="/" className="header-link">
-			<h2>blog</h2>
+			<h1>blog</h1>
 		</Link>
-	</div>
+	</header>
 )
 
 export default Header
