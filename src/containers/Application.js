@@ -1,9 +1,8 @@
 import React, { Component, cloneElement } from 'react'
 import { connect } from 'react-redux'
 
-import './Application.css'
-import { getPostdata, getPost, getPosts } from '../../actions'
-import Header from '../../components/Header'
+import { getPostdata, getPost, getPosts } from '../actions'
+import Header from '../components/Header'
 
 class Application extends Component {
 	componentDidMount() {

@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import './Posts.css'
-
 function links(postdata) {
 	return postdata.map((post, index) => (
 		<div key={index} className="posts-link-block">
