@@ -26,7 +26,7 @@ export function getPostdata() {
 }
 
 function fetchPost(dispatch, post) {
-	return fetch(post.file)
+	return fetch(`/blogs/${post.slug}.md`)
 		.then(response => response.text())
 		.then(post => converter.makeHtml(post))
 		.then(__html => dispatch({type: GET_POST_SUCCESS, __html, meta: post}))
