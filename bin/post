@@ -37,21 +37,21 @@ const json = new Promise((resolve, reject) => {
 const writeJson = Promise.all([json, firstLine]).then(([posts, firstLine]) => {
 	const title = firstLine.replace(/^#+ +/, '')
 	const slug = title.replace(/[^0-9A-Za-z]+/g, '-').toLowerCase()
-	const copyFile = new Promise((resolve, reject) => {
-		let writeStream
-		fs.createReadStream(file)
-			.pipe(writeStream = fs.createWriteStream(`${blogs}/${slug}.md`))
-			.on('close', () => {
-				console.log(`${slug}.md`)
-				return resolve(writeStream)
-			})
-			.on('error', error => reject(error))
-	}).catch(readWriteError)
+	const newfile = `${blogs}/${slug}.md`
+	const moveFile = new Promise((resolve, reject) => {
+		fs.rename(file, newfile, error => error && reject() || resolve())
+	}).then(() => console.log(path.resolve(newfile))).catch(readWriteError)
+
+	const post = posts.filter(post => post.slug == slug)
+
+	if (post) return Promise.resolve()
+
 	posts.push({
 		date: (new Date).toISOString(),
 		slug,
 		title
 	})
+
 	return new Promise((resolve, reject) => {
 		fs.writeFile(postsdotjson, JSON.stringify(posts), error => {
 			if (error) reject(error)
