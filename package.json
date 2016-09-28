@@ -7,7 +7,6 @@
     "react-scripts": "0.5.1"
   },
   "dependencies": {
-    "firstline": "^1.2.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
