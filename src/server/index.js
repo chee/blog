@@ -23,7 +23,7 @@ app.get('*', (request, response) => {
 				const component = components[components.length - 1]
 				const wrappedComponent = component.WrappedComponent
 				return wrappedComponent && wrappedComponent.fetchData
-				? component.fetchData({route: routes[routes.length - 1], location, params, store}, console.log)
+				? component.fetchData({route: routes[routes.length - 1], location, params, store})
 				: Promise.resolve()
 			}
 			fetchData().then(() => {
