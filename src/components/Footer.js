@@ -2,8 +2,8 @@ import React from 'react'
 import {Link} from 'react-router'
 
 const Footer = (props) => (
-	<footer className="footer">
-		<Link to="/posts" className="footer-link">
+	<footer>
+		<Link to="/posts">
 			other posts
 		</Link>
 	</footer>

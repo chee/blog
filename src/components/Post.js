@@ -4,14 +4,14 @@ import {Link} from 'react-router'
 import Time from './Time'
 
 const Post = ({post}) => (
-	<article className="post">
-		<Time date={post.meta.date}/>
-		{ post.titleLink && (post.__html = post.__html.replace(/.*\n/, '')) &&
-			<h1 className="post-title">
-				<Link className="post-title-link" to={`/post/${post.meta.slug}`}>{post.meta.title}</Link>
+	<article>
+		<Time date={post.date}/>
+		{ post.titleLink && (post.html = post.html.replace(/.*\n/, '')) &&
+			<h1>
+				<Link to={`/post/${post.slug}`}>{post.title}</Link>
 			</h1>
 		}
-		<div dangerouslySetInnerHTML={post}/>
+		<div dangerouslySetInnerHTML={{__html: post.html}}/>
 	</article>
 )
 
