@@ -8,14 +8,12 @@ import thunk from 'redux-thunk'
 
 import * as reducers from './reducers'
 
-import Application from './containers/Application'
-import Home from './components/Home'
-import PostAlone from './components/PostAlone'
-import Posts from './components/Posts'
+import routes from './routes'
 
 const createStoreWithMiddleware = applyMiddleware(
 	thunk,
-	routerMiddleware(browserHistory))(createStore)
+	routerMiddleware(browserHistory)
+)(createStore)
 
 const store = createStoreWithMiddleware(
 	combineReducers({
@@ -29,11 +27,7 @@ const history = syncHistoryWithStore(browserHistory, store)
 render(
 	<Provider store={store}>
 		<Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
-			<Route path="/" component={Application}>
-				<IndexRoute component={Home}/>
-				<Route path="posts" component={Posts}/>
-				<Route path="post/:slug" component={PostAlone}/>
-			</Route>
+			{routes}
 		</Router>
 	</Provider>,
 	document.getElementById('root')
