@@ -2,14 +2,14 @@ import React from 'react'
 import {Route, IndexRoute} from 'react-router'
 
 import Layout from './components/Layout'
-import Home from './components/Home'
-import PostAlone from './components/PostAlone'
-import Posts from './components/Posts'
+import HomePage from './containers/HomePage'
+import PostListPage from './containers/PostListPage'
+import PostPage from './containers/PostPage'
 
 export default (
 	<Route path="/" component={Layout}>
-		<IndexRoute component={Home}/>
-		<Route path="posts" component={Posts}/>
-		<Route path="post/:slug" component={PostAlone}/>
+		<IndexRoute component={HomePage}/>
+		<Route path="posts" component={PostListPage}/>
+		<Route path="post/:slug" component={PostPage}/>
 	</Route>
 )
