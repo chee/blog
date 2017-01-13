@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router'
+import {Link} from 'react-router'
 
 import Time from './Time'
 
-const Post = ({ post }) => (
+const Post = ({post}) => (
 	<article className="post">
 		<Time date={post.meta.date}/>
 		{ post.titleLink && (post.__html = post.__html.replace(/.*\n/, '')) &&

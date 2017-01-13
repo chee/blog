@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router'
+import {Link} from 'react-router'
 
 import Time from './Time'
 
@@ -14,7 +14,7 @@ function links(postdata) {
 	))
 }
 
-const Posts = ({ postdata }) => (
+const Posts = ({postdata}) => (
 	<div className="post-links">{ links(postdata) }</div>
 )
 
