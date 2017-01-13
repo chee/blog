@@ -1,7 +1,7 @@
 {
 	"name": "blogs",
 	"version": "0.0.0",
-	"description": "stupid blog thing written with react and redux that keeps the posts as markdown files and renders them on the client",
+	"description": "stupid blog thing written with react and redux that keeps the posts as markdown files and renders them on the client and the server",
 	"private": true,
 	"devDependencies": {
 		"react-scripts": "0.5.1"
