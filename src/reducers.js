@@ -21,12 +21,13 @@ export function posts(state = {}, action) {
 	case GET_POST_REQUEST:
 		return state
 	case GET_POST_SUCCESS:
-		const newState = { ...state }
-		newState[action.meta.slug] = {
-			__html: action.__html,
-			meta: action.meta
+		return {
+			...state,
+			[action.meta.slug]: {
+				__html: action.__html,
+				meta: action.meta
+			}
 		}
-		return newState
 	default:
 		return state
 	}
