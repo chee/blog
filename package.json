@@ -31,6 +31,6 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject",
-		"serve": "npm run build; rm build/index.html; mv build/static/main.*.js build/static/main.js; NODE_ENV=production babel-node src/server"
+		"serve": "npm run build; rm build/index.html; mv build/static/js/main.*.js build/static/js/main.js; NODE_ENV=production babel-node src/server"
 	}
 }
