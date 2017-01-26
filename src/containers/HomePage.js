@@ -10,9 +10,8 @@ import {
 
 class HomePage extends Component {
 	fetchData({store, params}) {
-		const {dispatch} = this.props
-		dispatch(fetchPostList()).then(({posts}) => {
-			posts.forEach(post => dispatch(fetchPost(post.slug)))
+		return store.dispatch(fetchPostList()).then(({posts}) => {
+			posts.forEach(post => store.dispatch(fetchPost(post.slug)))
 		})
 	}
 	componentDidMount() {
