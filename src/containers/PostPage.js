@@ -9,7 +9,7 @@ import {
 } from '../actions'
 
 class PostPage extends Component {
-	fetchData({store, params}) {
+	static fetchData({store, params}) {
 		// TODO: organise the reducers so that these can happen in parallel
 		return store.dispatch(fetchPostList()).then(() => store.dispatch(fetchPost(params.slug)))
 	}

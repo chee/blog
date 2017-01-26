@@ -6,7 +6,7 @@ import PostList from '../components/PostList'
 import {fetchPostList} from '../actions'
 
 class PostListPage extends Component {
-	fetchData({store}) {
+	static fetchData({store}) {
 		return store.dispatch(fetchPostList())
 	}
 	componentDidMount() {

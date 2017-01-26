@@ -9,7 +9,7 @@ import {
 } from '../actions'
 
 class HomePage extends Component {
-	fetchData({store, params}) {
+	static fetchData({store, params}) {
 		return store.dispatch(fetchPostList()).then(({posts}) => {
 			posts.forEach(post => store.dispatch(fetchPost(post.slug)))
 		})
