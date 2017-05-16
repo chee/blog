@@ -4,11 +4,11 @@ import thunk from 'redux-thunk'
 import * as reducers from '../reducers'
 
 const createStoreWithMiddleware = applyMiddleware(
-	thunk
+  thunk
 )(createStore)
 
 export default () => (
-	createStoreWithMiddleware(
-		combineReducers(reducers)
-	)
+  createStoreWithMiddleware(
+    combineReducers(reducers)
+  )
 )

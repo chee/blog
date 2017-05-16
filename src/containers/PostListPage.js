@@ -6,23 +6,23 @@ import PostList from '../components/PostList'
 import {fetchPostList} from '../actions'
 
 class PostListPage extends Component {
-	static fetchData({store}) {
-		return store.dispatch(fetchPostList())
-	}
-	componentDidMount() {
-		const {dispatch} = this.props
-		dispatch(fetchPostList())
-	}
+  static fetchData ({store}) {
+    return store.dispatch(fetchPostList())
+  }
+  componentDidMount () {
+    const {dispatch} = this.props
+    dispatch(fetchPostList())
+  }
 
-	render() {
-		return <PostList posts={this.props.posts}/>
-	}
+  render () {
+    return <PostList posts={this.props.posts} />
+  }
 }
 
-function mapStateToProps({posts}) {
-	return {
-		posts
-	}
+function mapStateToProps ({posts}) {
+  return {
+    posts
+  }
 }
 
 export default connect(mapStateToProps)(PostListPage)

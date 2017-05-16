@@ -7,9 +7,9 @@ import PostListPage from './containers/PostListPage'
 import PostPage from './containers/PostPage'
 
 export default (
-	<Route path="/" component={Layout}>
-		<IndexRoute component={HomePage}/>
-		<Route path="posts" component={PostListPage}/>
-		<Route path="post/:slug" component={PostPage}/>
-	</Route>
+  <Route path='/' component={Layout}>
+    <IndexRoute component={HomePage} />
+    <Route path='posts' component={PostListPage} />
+    <Route path='post/:slug' component={PostPage} />
+  </Route>
 )

@@ -4,31 +4,31 @@ import {connect} from 'react-redux'
 import Post from '../components/Post'
 
 import {
-	fetchPostList,
-	fetchPost
+  fetchPostList,
+  fetchPost
 } from '../actions'
 
 class PostPage extends Component {
-	static fetchData({store, params}) {
-		// TODO: organise the reducers so that these can happen in parallel
-		return store.dispatch(fetchPostList()).then(() => store.dispatch(fetchPost(params.slug)))
-	}
-	componentDidMount() {
-		const {dispatch, params} = this.props
-		dispatch(fetchPostList()).then(() => dispatch(fetchPost(params.slug)))
-	}
+  static fetchData ({store, params}) {
+    // TODO: organise the reducers so that these can happen in parallel
+    return store.dispatch(fetchPostList()).then(() => store.dispatch(fetchPost(params.slug)))
+  }
+  componentDidMount () {
+    const {dispatch, params} = this.props
+    dispatch(fetchPostList()).then(() => dispatch(fetchPost(params.slug)))
+  }
 
-	render() {
-		const {posts, params} = this.props
-		const post = posts.filter(({slug}) => slug == params.slug)[0]
-		return post ? <Post post={post}/> : null
-	}
+  render () {
+    const {posts, params} = this.props
+    const post = posts.filter(({slug}) => slug === params.slug)[0]
+    return post ? <Post post={post} /> : null
+  }
 }
 
-function mapStateToProps({posts}) {
-	return {
-		posts
-	}
+function mapStateToProps ({posts}) {
+  return {
+    posts
+  }
 }
 
 export default connect(mapStateToProps)(PostPage)

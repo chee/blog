@@ -11,24 +11,24 @@ import * as reducers from './reducers'
 import routes from './routes'
 
 const createStoreWithMiddleware = applyMiddleware(
-	thunk,
-	routerMiddleware(browserHistory)
+  thunk,
+  routerMiddleware(browserHistory)
 )(createStore)
 
 const store = createStoreWithMiddleware(
-	combineReducers({
-		...reducers,
-		routing: routerReducer
-	}), window.devToolsExtension && window.devToolsExtension()
+  combineReducers({
+    ...reducers,
+    routing: routerReducer
+  }), window.devToolsExtension && window.devToolsExtension()
 )
 
 const history = syncHistoryWithStore(browserHistory, store)
 
 render(
-	<Provider store={store}>
-		<Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
-			{routes}
-		</Router>
-	</Provider>,
-	document.getElementById('root')
+  <Provider store={store}>
+    <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
+      {routes}
+    </Router>
+  </Provider>,
+  document.getElementById('root')
 )
