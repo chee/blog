@@ -1,36 +1,37 @@
 {
-	"name": "blogs",
-	"version": "0.0.0",
-	"description": "stupid blog thing written with react and redux that keeps the posts as markdown files and renders them on the client and the server",
-	"private": true,
-	"devDependencies": {
-		"react-scripts": "0.5.1"
-	},
-	"dependencies": {
-		"express": "^4.14.0",
-		"react": "^15.3.2",
-		"react-dom": "^15.3.2",
-		"react-redux": "^4.4.5",
-		"react-router": "^2.8.1",
-		"react-router-redux": "^4.0.6",
-		"redux": "^3.6.0",
-		"redux-thunk": "^2.1.0",
-		"showdown": "^1.4.3"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/chee/blogs.git"
-	},
-	"author": "chee <chee@snaek.org> (https://snaek.org/)",
-	"license": "GPL-3.0+",
-	"bugs": {
-		"url": "https://github.com/chee/blogs/issues"
-	},
-	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test --env=jsdom",
-		"eject": "react-scripts eject",
-		"serve": "npm run build; rm build/index.html; mv build/static/js/main.*.js build/static/js/main.js; NODE_ENV=production babel-node src/server"
-	}
+  "name": "blogs",
+  "version": "0.0.0",
+  "description": "stupid blog thing written with react and redux that keeps the posts as markdown files and renders them on the client and the server",
+  "private": true,
+  "devDependencies": {
+  	"react-scripts": "0.5.1",
+  	"standard": "^10.0.2"
+  },
+  "dependencies": {
+  	"express": "^4.14.0",
+  	"react": "^15.3.2",
+  	"react-dom": "^15.3.2",
+  	"react-redux": "^4.4.5",
+  	"react-router": "^2.8.1",
+  	"react-router-redux": "^4.0.6",
+  	"redux": "^3.6.0",
+  	"redux-thunk": "^2.1.0",
+  	"showdown": "^1.4.3"
+  },
+  "repository": {
+  	"type": "git",
+  	"url": "git+https://github.com/chee/blogs.git"
+  },
+  "author": "chee <chee@snaek.org> (https://snaek.org/)",
+  "license": "GPL-3.0+",
+  "bugs": {
+  	"url": "https://github.com/chee/blogs/issues"
+  },
+  "scripts": {
+  	"start": "react-scripts start",
+  	"build": "react-scripts build",
+  	"test": "react-scripts test --env=jsdom",
+  	"eject": "react-scripts eject",
+  	"serve": "npm run build; rm build/index.html; mv build/static/js/main.*.js build/static/js/main.js; NODE_ENV=production babel-node src/server"
+  }
 }
