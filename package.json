@@ -4,6 +4,7 @@
   "description": "stupid blog thing written with react and redux that keeps the posts as markdown files and renders them on the client and the server",
   "private": true,
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-preset-react-app": "^3.1.0",
     "react-scripts": "^1.0.17",
@@ -36,6 +37,6 @@
     "build": "react-scripts build; rm build/index.html",
     "test": "echo lol",
     "eject": "react-scripts eject",
-    "serve": "babel-node src/server"
+    "serve": "NODE_ENV=${NODE_ENV:-development} babel-node src/server"
   }
 }
