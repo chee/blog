@@ -1,3 +1,5 @@
+import 'dotenv/config'
+
 import Express from 'express'
 import React from 'react'
 import {Provider} from 'react-redux'
@@ -7,10 +9,51 @@ import routes from '../routes'
 import createStore from './store'
 import {renderToString} from 'react-dom/server'
 
+import fs from 'fs'
+import path from 'path'
+
+const buildDir = `${__dirname}/../../build`
+const assetsFile = `${buildDir}/asset-manifest.json`
+
+let assets = require(assetsFile)
+fs.watch(buildDir, (type, name) => {
+  delete require.cache[require.resolve(assetsFile)]
+  try {
+    console.log('reloading assets file')
+    assets = require(assetsFile)
+  } catch (error) {
+    console.log('couldnt load assetsFile', error)
+  }
+})
+
 const app = new Express()
 const port = process.env.PORT || 5555
 
-app.use(Express.static(`${__dirname}/../../build`))
+app.use(Express.static(buildDir))
+
+function fetchData ({renderProps, store}) {
+  const {params, components, location, routes} = renderProps
+  const component = components[components.length - 1]
+  const wrappedComponent = component.WrappedComponent
+  return wrappedComponent && wrappedComponent.fetchData
+    ? component.fetchData({
+      route: routes[routes.length - 1],
+      location,
+      params,
+      store
+    })
+    : Promise.resolve()
+}
+
+function renderWithData ({store, renderProps, response}) {
+  const html = renderToString(
+    <Provider store={store}>
+      <RouterContext {...renderProps} />
+    </Provider>
+  )
+  const state = store.getState()
+  response.send(renderFullPage({html, state}))
+}
 
 app.get('*', (request, response) => {
   const store = createStore()
@@ -18,36 +61,28 @@ app.get('*', (request, response) => {
     if (error) return response.status(500).send(error.message)
     if (redirectLocation) return response.redirect(302, redirectLocation.pathname + redirectLocation.search)
     if (renderProps) {
-      const fetchData = () => {
-        const {params, components, location, routes} = renderProps
-        const component = components[components.length - 1]
-        const wrappedComponent = component.WrappedComponent
-        return wrappedComponent && wrappedComponent.fetchData
-        ? component.fetchData({route: routes[routes.length - 1], location, params, store})
-        : Promise.resolve()
-      }
-      fetchData().then(() => {
-        const html = renderFullPage(renderToString(
-          <Provider store={store}>
-            <RouterContext {...renderProps} />
-          </Provider>
-        ), store.getState())
-        response.send(html)
-      })
+      fetchData({renderProps, store}).then(() =>
+        renderWithData({store, renderProps, response})
+      )
     } else {
-      const html = renderToString(<div>lol oh no</div>)
-      response.status(404)
-      return response.send(renderFullPage(html, {}))
+      response
+        .status(404)
+        .sendFile('404.html', {
+          root: path.resolve(__dirname, '../../public')
+        })
     }
   })
 })
 
-function renderFullPage (html, state) {
+function renderFullPage ({html, state}) {
   return `
   <!doctype html>
   <html lang="en">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    window.__state = ${JSON.stringify(state).replace(/<\/script/g, '&lt;/script')}
+  </script>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/${assets['main.css']}">
   <!--
         <![CDATA[
                              ## #
@@ -68,15 +103,14 @@ function renderFullPage (html, state) {
                             ##
         ]]>
   -->
-  <title>title blogs</title>
-  <script>
-    window.__state = ${JSON.stringify(state)}
-  </script>
-  <div id="root" role="main">hello ${html}</div>
-  <script src="/static/js/main.js"></script>
+  <div id="root" role="main">${html}</div>
+  <script src="/${assets['main.js']}"></script>
   `
 }
 
 app.listen(port)
 
-console.log(`now listening on http://localhost:${port}`)
+console.log(`
+  now listening on:
+    http://localhost:${port}
+`)
