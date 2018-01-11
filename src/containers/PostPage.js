@@ -10,25 +10,73 @@ import {
 
 class PostPage extends Component {
   static fetchData ({store, params}) {
+    const {
+      dispatch
+    } = store
+
     // TODO: organise the reducers so that these can happen in parallel
-    return store.dispatch(fetchPostList()).then(() => store.dispatch(fetchPost(params.slug)))
+    return dispatch(fetchPostList()).then(() =>
+      dispatch(fetchPost(params.slug))
+    )
   }
+
   componentDidMount () {
-    const {dispatch, params} = this.props
-    dispatch(fetchPostList()).then(() => dispatch(fetchPost(params.slug)))
+    const {
+      params,
+      fetchPostList,
+      fetchPost
+    } = this.props
+
+    fetchPostList().then(() =>
+      fetchPost(params.slug)
+    )
   }
 
   render () {
-    const {posts, params} = this.props
-    const post = posts.filter(({slug}) => slug === params.slug)[0]
-    return post ? <Post post={post} /> : null
+    const {
+      posts,
+      params: {
+        slug
+      },
+      unpublishedShown
+    } = this.props
+
+    const post = posts.find(post => post.slug === slug)
+
+    if (!post) return null
+
+    const {
+      published
+    } = post
+
+    const shouldShow = unpublishedShown || published
+
+    if (!shouldShow) return null
+
+    return (
+      <main>
+        <Post
+          {...post}
+        />
+      </main>
+    )
   }
 }
 
-function mapStateToProps ({posts}) {
+function mapStateToProps (state) {
+  const {
+    posts,
+    preferences: {
+      unpublishedShown
+    }
+  } = state
+
   return {
-    posts
+    posts,
+    unpublishedShown
   }
 }
 
-export default connect(mapStateToProps)(PostPage)
+const mapDispatchToProps = {fetchPost, fetchPostList}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostPage)
