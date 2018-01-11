@@ -1,24 +1,54 @@
 import {
-  FETCH_POST_LIST_SUCCESS,
-  FETCH_POST_SUCCESS
+  fetchPostList,
+  fetchPost,
+  toggleUnpublished
 } from './actions'
 
 export function posts (state = [], action) {
   switch (action.type) {
-    case FETCH_POST_LIST_SUCCESS:
+    case fetchPostList.success: {
       return [
         ...state,
-        ...action.posts
+        ...action.payload
       ]
-    case FETCH_POST_SUCCESS:
-      return [
-        ...state.map(post => (
-      post.slug === action.slug ? {
-        ...post,
-        html: action.html,
-        fetched: true
-      } : post
-    ))]
+    }
+    case fetchPost.success: {
+      const {
+        slug,
+        html,
+        md
+      } = action.payload
+      const posts = state.map(post => {
+        if (post.slug !== slug) return post
+
+        return {
+          ...post,
+          html,
+          md,
+          fetched: true
+        }
+      })
+      return posts
+    }
+    default:
+      return state
+  }
+}
+
+function getInitialPreferences () {
+  return {
+    unpublishedShown: false
+  }
+}
+
+export function preferences (state = getInitialPreferences(), action) {
+  switch (action.type) {
+    case toggleUnpublished.actionType: {
+      return {
+        ...state,
+        unpublishedShown: !state.unpublishedShown
+      }
+    }
     default:
       return state
   }
