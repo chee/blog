@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+
 import {connect} from 'react-redux'
 
 import PostList from '../components/PostList'
@@ -9,20 +10,48 @@ class PostListPage extends Component {
   static fetchData ({store}) {
     return store.dispatch(fetchPostList())
   }
+
   componentDidMount () {
-    const {dispatch} = this.props
-    dispatch(fetchPostList())
+    const {
+      fetchPostList
+    } = this.props
+
+    fetchPostList()
   }
 
   render () {
-    return <PostList posts={this.props.posts} />
+    const {
+      posts,
+      unpublishedShown
+    } = this.props
+
+    return (
+      <main>
+        <PostList
+          posts={posts}
+          unpublishedShown={unpublishedShown}
+        />
+      </main>
+    )
   }
 }
 
-function mapStateToProps ({posts}) {
+function mapStateToProps (state) {
+  const {
+    posts,
+    preferences: {
+      unpublishedShown
+    }
+  } = state
+
   return {
-    posts
+    posts,
+    unpublishedShown
   }
 }
 
-export default connect(mapStateToProps)(PostListPage)
+const mapDispatchToProps = {
+  fetchPostList
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostListPage)
