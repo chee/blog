@@ -1,5 +1,10 @@
 import React from 'react'
-import {Route, IndexRoute} from 'react-router'
+
+import {
+  Redirect,
+  Route,
+  IndexRoute
+} from 'react-router'
 
 import Layout from './components/Layout'
 import HomePage from './containers/HomePage'
@@ -9,7 +14,9 @@ import PostPage from './containers/PostPage'
 export default (
   <Route path='/' component={Layout}>
     <IndexRoute component={HomePage} />
+    <Redirect from='page/0' to='/' />
+    <Route path='page/:page' component={HomePage} />
     <Route path='posts' component={PostListPage} />
-    <Route path='post/:slug' component={PostPage} />
+    <Route path='posts/:slug' component={PostPage} />
   </Route>
 )
