@@ -1,55 +1,93 @@
-/* global fetch */
 import 'isomorphic-fetch'
-import showdown from 'showdown'
+import md from './md'
 
-export const FETCH_POST_LIST_REQUEST = 'FETCH_POSTS_LIST_REQUEST'
-export const FETCH_POST_LIST_SUCCESS = 'FETCH_POSTS_LIST_SUCCESS'
-export const FETCH_POST_LIST_FAILURE = 'FETCH_POSTS_LIST_FAILURE'
+function createAction (type) {
+  function actionCreator (payload) {
+    return {
+      type,
+      payload
+    }
+  }
 
-export const FETCH_POST_REQUEST = 'FETCH_POST_REQUEST'
-export const FETCH_POST_SUCCESS = 'FETCH_POST_SUCCESS'
-export const FETCH_POST_FAILURE = 'FETCH_POST_FAILURE'
+  actionCreator.actionType = type
 
-const converter = new showdown.Converter()
+  return actionCreator
+}
+
+const fetchPostListRequest = createAction('fetch post list request')
+const fetchPostListSuccess = createAction('fetch post list success')
+const fetchPostListFailure = createAction('fetch post list failure')
+
+const root = process.env.DOCUMENT_ROOT || ''
 
 export function fetchPostList () {
   return (dispatch, getState) => {
-    dispatch({type: FETCH_POST_LIST_REQUEST})
-    const {posts} = getState()
-    if (posts.length) {
-      return Promise.resolve({posts})
+    const {
+      posts: cachedPosts
+    } = getState()
+
+    const success = posts => dispatch(fetchPostListSuccess(posts))
+    const failure = error => dispatch(fetchPostListFailure(error))
+
+    if (cachedPosts.length) {
+      return Promise.resolve(cachedPosts)
     }
-    return fetch('/posts.json')
+
+    dispatch(fetchPostListRequest())
+
+    const posts = fetch(`${root}/posts.json`)
       .then(response => response.json())
-      .then(posts => dispatch({
-        type: FETCH_POST_LIST_SUCCESS,
-        posts: posts.reverse()
-      }))
-      .catch(error => dispatch({type: FETCH_POST_LIST_FAILURE, error}))
+      .then(posts => posts.reverse())
+
+    posts
+      .then(success)
+      .catch(failure)
+
+    return posts
   }
 }
 
+fetchPostList.request = fetchPostListRequest.actionType
+fetchPostList.success = fetchPostListSuccess.actionType
+fetchPostList.failure = fetchPostListFailure.actionType
+
+const fetchPostRequest = createAction('fetch post request')
+const fetchPostSuccess = createAction('fetch post success')
+const fetchPostFailure = createAction('fetch post failure')
+
 export function fetchPost (slug) {
   return (dispatch, getState) => {
-    dispatch({type: FETCH_POST_REQUEST})
-    const {posts} = getState()
-    const post = posts.filter(({slug: innerSlug}) => slug === innerSlug)[0]
-    if (post && post.fetched) {
-      return Promise.resolve(dispatch({
-        type: FETCH_POST_SUCCESS,
-        ...post
-      }))
+    dispatch(fetchPostRequest(slug))
+
+    const {
+      posts: cachedPosts
+    } = getState()
+
+    const success = payload => dispatch(fetchPostSuccess(payload))
+    const failure = error => dispatch(fetchPostFailure(error))
+
+    const cachedPost = cachedPosts.find(post => slug === post.slug)
+
+    if (cachedPost && cachedPost.fetched) {
+      return Promise.resolve(success(cachedPost))
     }
-    return fetch(`/blogs/${slug}.md`)
+
+    const post = fetch(`${root}/posts/${slug}.md`)
       .then(response => response.text())
-      .then(post => converter.makeHtml(post))
-      .then(html => dispatch({
-        type: FETCH_POST_SUCCESS,
-        html,
+      .then(post => ({
+        md: post,
+        html: md.render(post),
         slug
       }))
-      .catch(error => dispatch({
-        type: FETCH_POST_FAILURE, error
-      }))
+
+    return post
+      .then(success)
+      .catch(failure)
   }
 }
+
+fetchPost.request = fetchPostRequest.actionType
+fetchPost.success = fetchPostSuccess.actionType
+fetchPost.failure = fetchPostFailure.actionType
+
+export const toggleUnpublished = createAction('toggle unpublished')
