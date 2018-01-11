@@ -18,7 +18,15 @@ const fetchPostListRequest = createAction('fetch post list request')
 const fetchPostListSuccess = createAction('fetch post list success')
 const fetchPostListFailure = createAction('fetch post list failure')
 
-const root = process.env.DOCUMENT_ROOT || ''
+const root = process.env.REACT_APP_DOCUMENT_ROOT || ''
+
+if (!root) {
+  console.error('🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 ')
+  console.warn('no REACT_APP_DOCUMENT_ROOT environment variable supplied')
+  console.warn('server side rendering will fail')
+  console.info('check .env file!')
+    console.error('🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 ')
+}
 
 export function fetchPostList () {
   return (dispatch, getState) => {
