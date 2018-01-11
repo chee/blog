@@ -4,34 +4,38 @@
   "description": "stupid blog thing written with react and redux that keeps the posts as markdown files and renders them on the client and the server",
   "private": true,
   "devDependencies": {
-  	"react-scripts": "0.5.1",
-  	"standard": "^10.0.2"
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-preset-react-app": "^3.1.0",
+    "react-scripts": "^1.0.17",
+    "standard": "^10.0.2"
   },
   "dependencies": {
-  	"express": "^4.14.0",
-  	"react": "^15.3.2",
-  	"react-dom": "^15.3.2",
-  	"react-redux": "^4.4.5",
-  	"react-router": "^2.8.1",
-  	"react-router-redux": "^4.0.6",
-  	"redux": "^3.6.0",
-  	"redux-thunk": "^2.1.0",
-  	"showdown": "^1.4.3"
+    "express": "^4.14.0",
+    "js-beautify": "^1.7.5",
+    "minimist": "^1.2.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.8.1",
+    "react-router-redux": "^4.0.6",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0",
+    "remarkable": "^1.7.1"
   },
   "repository": {
-  	"type": "git",
-  	"url": "git+https://github.com/chee/blogs.git"
+    "type": "git",
+    "url": "git+https://github.com/chee/blogs.git"
   },
   "author": "chee <chee@snaek.org> (https://snaek.org/)",
   "license": "GPL-3.0+",
   "bugs": {
-  	"url": "https://github.com/chee/blogs/issues"
+    "url": "https://github.com/chee/blogs/issues"
   },
   "scripts": {
-  	"start": "react-scripts start",
-  	"build": "react-scripts build",
-  	"test": "react-scripts test --env=jsdom",
-  	"eject": "react-scripts eject",
-  	"serve": "npm run build; rm build/index.html; mv build/static/js/main.*.js build/static/js/main.js; NODE_ENV=production babel-node src/server"
+    "start": "react-scripts start",
+    "build": "react-scripts build; rm build/index.html",
+    "test": "echo lol",
+    "eject": "react-scripts eject",
+    "serve": "babel-node src/server"
   }
 }
