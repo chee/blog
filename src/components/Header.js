@@ -1,10 +1,14 @@
 import React from 'react'
 import {Link} from 'react-router'
 
-const Header = (props) => (
+const Header = () => (
   <header>
-    <Link to='/'>
-      <h1>blog</h1>
+    <Link
+      onClick={event => event.stopPropagation()}
+      to='/'>
+      <h2>
+        blog
+      </h2>
     </Link>
   </header>
 )
