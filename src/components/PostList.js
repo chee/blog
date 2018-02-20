@@ -3,16 +3,30 @@ import {Link} from 'react-router'
 
 import Time from './Time'
 
-const PostList = ({posts}) => (
+const PostList = ({posts, unpublishedShown}) => (
   <div>
-    {
-    posts.map((post, index) => (
-      <div key={index}>
-        <Link to={`/post/${post.slug}`}>
-          <span>{post.title} - </span> <Time date={post.date} />
-        </Link>
-      </div>
-    ))
+    {posts.map((post, index) => {
+      const {
+        slug,
+        title,
+        date,
+        published
+      } = post
+
+      if (!published && !unpublishedShown) return null
+
+      return (
+        <div key={index}>
+          <Link to={`/posts/${slug}`}>
+            <span>
+              {title}
+            </span>
+            {' '}
+            <Time date={date} />
+          </Link>
+        </div>
+      )
+    })
   }
   </div>
 )
