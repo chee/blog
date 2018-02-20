@@ -1,18 +1,36 @@
-import React from 'react'
+import React, {PureComponent} from 'react'
 import {Link} from 'react-router'
 
 import Time from './Time'
 
-const Post = ({post}) => (
-  <article>
-    <Time date={post.date} />
-    { post.titleLink && (post.html = post.html.replace(/.*\n/, '')) &&
-    <h1>
-      <Link to={`/post/${post.slug}`}>{post.title}</Link>
-    </h1>
-    }
-    <div dangerouslySetInnerHTML={{__html: post.html}} />
-  </article>
-)
+export default class Post extends PureComponent {
+  render () {
+    const {
+      date,
+      titleLink,
+      title,
+      html,
+      slug
+    } = this.props
 
-export default Post
+    const __html = titleLink
+      ? html.replace(/.*\n/, '')
+      : html
+
+    return (
+      <article>
+        <Time date={date} />
+        {titleLink &&
+          <h1>
+            <Link
+              to={`/posts/${slug}`}>
+              {title}
+            </Link>
+          </h1>
+        }
+        <div dangerouslySetInnerHTML={{__html}} />
+        &lt;3
+      </article>
+    )
+  }
+}
