@@ -1,10 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router'
 
-const Footer = (props) => (
+const Footer = () => (
   <footer>
     <Link to='/posts'>
-      other posts
+      all posts
     </Link>
   </footer>
 )
